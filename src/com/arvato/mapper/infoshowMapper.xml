@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.arvato.mapper.infoshowMapper">
+ <resultMap type="com.arvato.po.infoshow" id="infoshowResultMap">
+     <result column="infoNo" property="infoNo"/>
+     <result column="infoTitle" property="infoTitle"/>
+     <result column="infoContext" property="infoContext"/>
+  
+ </resultMap>
+ <select id="toSearch" resultMap="infoshowResultMap" >
+ select * from infoShow
+ </select>
+ <delete id="toDeleteTitle" parameterType="int">
+ delete from infoShow where infoNo=#{infoNo}
+ </delete>
+ <select id="toSearchContext" parameterType="int" resultMap="infoshowResultMap" >
+ select * from infoShow where infoNo=#{infoNo}
+ </select>
+ <update id="toEdit" parameterType="String">
+ UPDATE infoshow set infoTitle=#{1} where infoNo=#{0}
+ </update>
+</mapper>

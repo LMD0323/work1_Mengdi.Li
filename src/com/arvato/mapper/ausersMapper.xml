@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.arvato.mapper.ausersMapper">
+
+<resultMap type="com.arvato.po.ausers" id="auserinfoResultMap">
+   <result column="userPhone" property="userPhone"/>
+   <result column="userPwd" property="userPwd"/>
+   <result column="loginNum" property="loginNum"/>
+   <result column="loginTime" property="loginTime"/>
+ </resultMap>
+ 
+  <select id="toLogin" parameterType="ausers" resultMap="auserinfoResultMap">
+       select * from userinfo where userPhone=#{userPhone} and userPwd=#{userPwd} 
+   </select>
+   <select id="tojudgeisadd" parameterType="String" resultMap="auserinfoResultMap">
+   select * from userinfo where userPhone=#{userPhone}
+   </select>
+ <insert id="toaddusers" parameterType="String">
+ insert into userinfo(userPhone,userPwd,loginNum) VALUES(#{0},#{1},1)
+ </insert>
+ <update id="toupdateloginnum" parameterType="String">
+ update userinfo set loginNum=loginNum+1,loginTime=#{1,javaType=String} where userPhone=#{0}
+ </update>
+ <update id="toinitialloginnum" parameterType="String">
+ update userinfo set loginNum=0 where userPhone=#{userPhone}
+ </update>
+</mapper>
